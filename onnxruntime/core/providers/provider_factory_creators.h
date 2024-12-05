@@ -101,3 +101,7 @@
 #if defined(USE_AZURE)
 #include "core/providers/azure/azure_provider_factory_creator.h"
 #endif
+
+#if defined(USE_TTNN)
+#include "core/providers/ttnn/ttnn_provider_factory_creator.h"
+#endif

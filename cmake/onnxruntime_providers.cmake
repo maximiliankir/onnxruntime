@@ -116,6 +116,9 @@ endif()
 if (onnxruntime_USE_AZURE)
   set(PROVIDERS_AZURE onnxruntime_providers_azure)
 endif()
+if(onnxruntime_USE_TTNN)
+  set(PROVIDERS_TTNN onnxruntime_providers_ttnn)
+endif()
 
 
 if(onnxruntime_USE_SNPE)
@@ -205,4 +208,8 @@ endif()
 
 if (onnxruntime_USE_AZURE)
   include(onnxruntime_providers_azure.cmake)
+endif()
+
+if (onnxruntime_USE_TTNN)
+  include(onnxruntime_providers_ttnn.cmake)
 endif()

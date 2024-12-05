@@ -764,6 +764,8 @@ def parse_arguments():
     parser.add_argument("--use_triton_kernel", action="store_true", help="Use triton compiled kernels")
     parser.add_argument("--use_lock_free_queue", action="store_true", help="Use lock-free task queue for threadpool.")
 
+    parser.add_argument("--use_ttnn", action="store_true", help="Build with Tenstorrent TTNN")
+
     if not is_windows():
         parser.add_argument(
             "--allow_running_as_root",
@@ -1093,6 +1095,7 @@ def generate_build_tree(
         "-Donnxruntime_DISABLE_FLOAT8_TYPES=" + ("ON" if disable_float8_types else "OFF"),
         "-Donnxruntime_DISABLE_SPARSE_TENSORS=" + ("ON" if disable_sparse_tensors else "OFF"),
         "-Donnxruntime_DISABLE_OPTIONAL_TYPE=" + ("ON" if disable_optional_type else "OFF"),
+        "-Donnxruntime_USE_TTNN=" + ("ON" if args.use_ttnn else "OFF"),
     ]
 
     if args.rv64:

@@ -200,6 +200,10 @@ extern onnxruntime::ArenaExtendStrategy arena_extend_strategy;
 #include "core/providers/dnnl/dnnl_provider_factory.h"
 #include "core/providers/shared_library/provider_host_api.h"
 
+#ifdef USE_TTNN
+#include "core/providers/ttnn/ttnn_provider_factory.h"
+#endif
+
 namespace onnxruntime {
 #if !defined(SHARED_PROVIDER) && !defined(DISABLE_SPARSE_TENSORS)
 class SparseTensor;

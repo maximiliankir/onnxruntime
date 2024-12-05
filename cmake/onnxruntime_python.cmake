@@ -181,6 +181,7 @@ target_link_libraries(onnxruntime_pybind11_state PRIVATE
     ${PROVIDERS_WEBGPU}
     ${PROVIDERS_AZURE}
     ${PROVIDERS_QNN}
+    ${PROVIDERS_TTNN}
     onnxruntime_optimizer
     onnxruntime_providers
     onnxruntime_util
@@ -1024,6 +1025,15 @@ if (onnxruntime_USE_VSINPU)
     TARGET onnxruntime_pybind11_state POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
         $<TARGET_FILE:onnxruntime_providers_vsinpu>
+        $<TARGET_FILE_DIR:${build_output_target}>/onnxruntime/capi/
+  )
+endif()
+
+if (onnxruntime_USE_TTNN)
+  add_custom_command(
+    TARGET onnxruntime_pybind11_state POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        $<TARGET_FILE:onnxruntime_providers_ttnn>
         $<TARGET_FILE_DIR:${build_output_target}>/onnxruntime/capi/
   )
 endif()

@@ -47,6 +47,10 @@
 #include "core/providers/coreml/coreml_provider_factory.h"
 #endif
 
+#ifdef USE_TTNN
+#include "core/providers/ttnn/ttnn_provider_factory.h"
+#endif
+
 #include <pybind11/functional.h>
 
 // Explicitly provide a definition for the static const var 'GPU' in the OrtDevice struct,
@@ -1255,6 +1259,10 @@ std::unique_ptr<IExecutionProvider> CreateExecutionProviderInstance(
     return onnxruntime::QNNProviderFactoryCreator::Create(
                cit == provider_options_map.end() ? ProviderOptions{} : cit->second, &session_options)
         ->CreateProvider();
+#endif
+  } else if (type == kTtnnExecutionProvider) {
+#ifdef USE_TTNN
+    return onnxruntime::TTNNProviderFactoryCreator::Create()->CreateProvider();
 #endif
   } else {
     // check whether it is a dynamic load EP:
