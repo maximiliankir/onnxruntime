@@ -11,7 +11,8 @@ file(GLOB_RECURSE
 source_group(TREE ${ONNXRUNTIME_ROOT}/core FILES ${onnxruntime_providers_ttnn_cc_srcs})
 onnxruntime_add_static_library(onnxruntime_providers_ttnn ${onnxruntime_providers_ttnn_cc_srcs})
 onnxruntime_add_include_to_target(onnxruntime_providers_ttnn onnxruntime_common onnxruntime_framework onnx onnx_proto protobuf::libprotobuf-lite flatbuffers::flatbuffers Boost::mp11)
-target_link_libraries(onnxruntime_providers_ttnn)
+add_dependencies(onnxruntime_providers_ttnn onnx ${onnxruntime_EXTERNAL_DEPENDENCIES})
+
 
 # Add Dependencies and Properties for the compilation
 # TODO
